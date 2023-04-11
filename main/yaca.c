@@ -228,10 +228,10 @@ void parseCMD(char *cmd)
         }
         break;
     case 'C':
-        ESP_LOGI("can", "Stopping recvTask");
+        ESP_LOGI("can", "Stopping recv Task");
         vTaskSuspend(recvHandle);
         stop_can();
-        gpio_set_level(BLINK_GPIO, 0);
+        gpio_set_level(BLINK_GPIO, false);
         return;
     case 'O':
         start_can();
@@ -245,7 +245,7 @@ void parseCMD(char *cmd)
             ESP_LOGI("can", "Resume recv Task");
             vTaskResume(recvHandle);
         }
-        gpio_set_level(BLINK_GPIO, 1);
+        gpio_set_level(BLINK_GPIO, true);
         return;
     case 'V':
         uart_write_bytes(EX_UART_NUM, "V1013\r", 6);
